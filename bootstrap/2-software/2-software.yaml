@@ -2,9 +2,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: infra
+  name: software
   labels:
-    gitops.tier.layer: infra
+    gitops.tier.layer: software
 spec:
   sourceRepos: [] # Populated by kustomize patches in 1-infra/kustomization.yaml
   destinations:
@@ -113,7 +113,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: 1-infra
+  name: 2-software
   annotations:
     argocd.argoproj.io/sync-wave: "100"
   labels:
@@ -122,9 +122,9 @@ spec:
   destination:
     namespace: openshift-gitops
     server: https://kubernetes.default.svc
-  project: infra
+  project: software
   source: # repoURL  and targetRevision populated by kustomize patches in 1-infra/kustomization.yaml
-    path: bootstrap/1-infra
+    path: bootstrap/2-software
   syncPolicy:
     automated:
       prune: true

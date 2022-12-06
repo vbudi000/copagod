@@ -1,0 +1,4 @@
+resources:
+#- db2/db2.yaml
+#- ldap/ldap.yaml
+#- mq/mq.yaml

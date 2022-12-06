@@ -1,0 +1,23 @@
+resources:
+#- cp4ba/cp4ba.yaml
+#- cp4d/cp4d.yaml
+#- cp4i/cp4i.yaml
+#- cp4security/cp4security.yaml
+#- cp4waiops/cp4waiops.yaml
+#- spectrum/spectrum.yaml
+#- sterling/sterling.yaml
+#- turbo/turbo.yaml
+#- addons/addons.yaml
+
+patches:
+- target:
+    group: argoproj.io
+    kind: Application
+    labelSelector: "gitops.tier.layer=software"
+  patch: |-
+    - op: add
+      path: /spec/source/repoURL
+      value: ${GIT_BASEURL}/${GIT_ORG}/${GIT_GITOPS_SOFTWARE}
+    - op: add
+      path: /spec/source/targetRevision
+      value: ${GIT_GITOPS_SOFTWARE_BRANCH}
